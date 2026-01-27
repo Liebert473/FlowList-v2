@@ -43,7 +43,7 @@ export default function SigninPage() {
           - Desktop (lg): Two equal columns
           - items-stretch ensures both sides have the same height
       */}
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl md:grid-cols-2">
+      <div className="grid w-full max-w-6xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl md:grid-cols-2">
         {/* Left Column: Login Form */}
         <div className="flex flex-col justify-center px-8 py-12 sm:px-12">
           <div className="space-y-6">
@@ -116,7 +116,7 @@ export default function SigninPage() {
                   disabled={loading}
                   onClick={handleEmailSignin}
                   size="lg"
-                  className="w-full text-base font-semibold"
+                  className="w-full h-12 text-base font-semibold"
                 >
                   Sign in
                 </Button>
@@ -126,7 +126,7 @@ export default function SigninPage() {
                   onClick={handleGoogleSignin}
                   variant="outline"
                   size="lg"
-                  className="w-full bg-background"
+                  className="w-full h-12 bg-background"
                 >
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                     <path

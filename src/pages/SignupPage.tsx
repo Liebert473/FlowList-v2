@@ -5,10 +5,37 @@ import { Label } from "@/components/ui/label";
 import { Wind } from "lucide-react";
 import { SvgImage1 } from "@/components/common/svg/SvgImage1";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signUp, signInWithGoogle } from "@/lib/supabase";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleEmailSignup = async () => {
+    setLoading(true);
+    try {
+      await signUp(email, password);
+      navigate("/check-email");
+    } catch (err: any) {
+      setErrorMsg(err.message);
+    }
+    setLoading(false);
+  };
+
+  const handleGoogleSignin = async () => {
+    setLoading(true);
+    try {
+      await signInWithGoogle();
+    } catch (err: any) {
+      setErrorMsg(err.msg);
+    }
+    setLoading(false);
+  };
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-background p-4 md:p-8">
       {/* Main Container: 
@@ -16,7 +43,7 @@ export default function SignupPage() {
           - Desktop (lg): Two equal columns
           - items-stretch ensures both sides have the same height
       */}
-      <div className="grid w-full max-w-5xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl md:grid-cols-2">
+      <div className="grid w-full max-w-6xl overflow-hidden rounded-xl border border-border bg-card shadow-2xl md:grid-cols-2">
         {/* Left Column: Login Form */}
         <div className="flex flex-col justify-center px-8 py-12 sm:px-12">
           <div className="space-y-6">
@@ -35,6 +62,8 @@ export default function SignupPage() {
                 Please enter your details
               </p>
             </div>
+
+            {errorMsg && <p className="text-sm text-destructive">{errorMsg}</p>}
 
             {/* Form Fields */}
             <div className="grid gap-4">
@@ -81,14 +110,21 @@ export default function SignupPage() {
               </div>
 
               <div className="grid gap-3 pt-2">
-                <Button size="lg" className="w-full text-base font-semibold">
+                <Button
+                  disabled={loading}
+                  onClick={handleEmailSignup}
+                  size="lg"
+                  className="w-full text-base font-semibold h-12"
+                >
                   Sign up
                 </Button>
 
                 <Button
+                  disabled={loading}
+                  onClick={handleGoogleSignin}
                   variant="outline"
                   size="lg"
-                  className="w-full bg-background"
+                  className="w-full bg-background h-12"
                 >
                   <svg className="mr-2 h-5 w-5" viewBox="0 0 24 24">
                     <path

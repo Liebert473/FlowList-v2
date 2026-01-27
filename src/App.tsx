@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import { useAuth } from "./contexts/AuthContext";
 import SigninPage from "./pages/SigninPage";
 import SignupPage from "./pages/SignupPage";
+import CheckEmail from "./pages/CheckEmail";
 
 export function App() {
   const { user, loading } = useAuth();
@@ -22,6 +23,7 @@ export function App() {
         <Route path="/" element={<Navigate to="/dashboard" />} />
         <Route path="/signin" element={<SigninPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/check-email" element={<CheckEmail />} />
         <Route
           path="/dashboard"
           element={
