@@ -9,7 +9,7 @@ export default function CheckEmail() {
         <CardHeader className="p-0 pt-10">
           {/* Main Illustration Area */}
           <div className="flex justify-center px-8">
-            <div className="w-full max-w-[280px]">
+            <div className="w-full max-w-80">
               <EmailSvg />
             </div>
           </div>
